@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/letterdle/static/css/main.09c00499.css",
+    "main.js": "/letterdle/static/js/main.7e4eccd5.js",
+    "static/js/787.460e415b.chunk.js": "/letterdle/static/js/787.460e415b.chunk.js",
+    "index.html": "/letterdle/index.html",
+    "main.09c00499.css.map": "/letterdle/static/css/main.09c00499.css.map",
+    "main.7e4eccd5.js.map": "/letterdle/static/js/main.7e4eccd5.js.map",
+    "787.460e415b.chunk.js.map": "/letterdle/static/js/787.460e415b.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.09c00499.css",
+    "static/js/main.7e4eccd5.js"
+  ]
+}
