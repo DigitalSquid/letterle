@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
+import { Board } from './components/board/board';
 import { Letters } from './components/letters/letters';
 
 import './App.css';
@@ -49,40 +50,16 @@ function App() {
         <h1>Letterdle</h1>
       </header>
       <main>
-        <div className='board'>
-          {guesses.length === 0 ? (
-            <div className='guess'>&nbsp;</div>
-          ) : (
-            guesses.map((guess, index) => {
-              const guessState =
-                guess === correctLetter ? 'correct' : 'incorrect';
-              return (
-                <div className={`guess ${guessState}`} key={index}>
-                  {guess}
-                </div>
-              );
-            })
-          )}
-
-          <div ref={boardEndRef}>
-            {correctLetter.length === 1 && (
-              <div>
-                <h2>Congratulations!</h2>
-                <p>
-                  You solved the Letterdle in{' '}
-                  <strong className='correct-text'>{guesses.length}</strong>{' '}
-                  guess
-                  {guesses.length > 1 ? 'es' : ''}.
-                </p>
-              </div>
-            )}
-          </div>
-        </div>
+        <Board
+          guesses={guesses}
+          correctLetter={correctLetter}
+          boardEndRef={boardEndRef}
+        />
         <Letters
+          correctLetter={correctLetter}
+          incorrectLetters={incorrectLetters}
           letters={letters}
           selectLetter={selectLetter}
-          incorrectLetters={incorrectLetters}
-          correctLetter={correctLetter}
         />
       </main>
     </div>
