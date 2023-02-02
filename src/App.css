@@ -1,38 +1,57 @@
-.App {
+@import 'normalize.css';
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+
+:root {
+  --color-primary: #fff;
+  --color-secondary: #282c34;
+  --color-tertiary: #5a5a5a;
+}
+
+body {
+  background-color: var(--color-secondary);
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--color-primary);
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App {
+  margin: 0 auto;
+  padding: 0.5rem;
+  max-width: 60em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.board {
+  max-height: 18rem;
+  overflow-y: auto;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.guess {
+  border: 2px solid var(--color-tertiary);
+  color: var(--color-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 2.5rem;
+  width: 2.5rem;
+  margin: 0.25rem auto;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.incorrect {
+  background-color: rgb(120, 124, 126);
+  color: white;
+  cursor: initial;
+}
+
+.correct {
+  background-color: rgb(106, 170, 100);
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.correct-text {
+  color: rgb(106, 170, 100);
 }
