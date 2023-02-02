@@ -21,7 +21,11 @@ function App() {
   };
 
   const keyPress = ({ key }) => {
-    if (letters.includes(key) && !incorrectLetters.includes(key)) {
+    if (
+      letters.includes(key) &&
+      !incorrectLetters.includes(key) &&
+      correctLetter.length === 0
+    ) {
       addGuess(key);
     }
   };
@@ -35,7 +39,7 @@ function App() {
     return () => {
       window.removeEventListener('keydown', keyPress);
     };
-  }, [incorrectLetters]);
+  }, [incorrectLetters, correctLetter]);
 
   function selectLetter(e) {
     const button = e.currentTarget;
