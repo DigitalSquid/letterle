@@ -20,27 +20,44 @@ function App() {
     boardEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const keyPress = ({ key }) => {
+    if (letters.includes(key) && !incorrectLetters.includes(key)) {
+      addGuess(key);
+    }
+  };
+
   useEffect(() => {
     scrollToBottom();
   }, [guesses]);
 
+  useEffect(() => {
+    window.addEventListener('keydown', keyPress);
+    return () => {
+      window.removeEventListener('keydown', keyPress);
+    };
+  }, [incorrectLetters]);
+
   function selectLetter(e) {
     const button = e.currentTarget;
     const selectedLetter = button.value;
-    console.log(correctLetter);
+
     if (correctLetter.length === 0) {
       if (!button.classList.contains('incorrect')) {
-        setGuesses((guesses) => [...guesses, selectedLetter]);
-
-        if (selectedLetter === answer) {
-          setCorrectLetter(selectedLetter);
-        } else {
-          setIncorrectLetters((incorrectLetters) => [
-            ...incorrectLetters,
-            selectedLetter,
-          ]);
-        }
+        addGuess(selectedLetter);
       }
+    }
+  }
+
+  function addGuess(selectedLetter) {
+    setGuesses((guesses) => [...guesses, selectedLetter]);
+
+    if (selectedLetter === answer) {
+      setCorrectLetter(selectedLetter);
+    } else {
+      setIncorrectLetters((incorrectLetters) => [
+        ...incorrectLetters,
+        selectedLetter,
+      ]);
     }
   }
 
