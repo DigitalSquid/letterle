@@ -23,24 +23,6 @@ body {
   max-width: 60em;
 }
 
-.board {
-  max-height: 18rem;
-  overflow-y: auto;
-}
-
-.guess {
-  border: 2px solid var(--color-tertiary);
-  color: var(--color-primary);
-  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', sans-serif;
-  font-size: 1.5rem;
-  font-weight: bold;
-  line-height: 2.5rem;
-  width: 2.5rem;
-  margin: 0.25rem auto;
-  text-align: center;
-  text-transform: uppercase;
-}
-
 .incorrect {
   background-color: rgb(120, 124, 126);
   color: white;
