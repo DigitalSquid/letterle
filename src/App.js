@@ -20,26 +20,26 @@ function App() {
     boardEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const keyPress = ({ key }) => {
-    if (
-      letters.includes(key) &&
-      !incorrectLetters.includes(key) &&
-      correctLetter.length === 0
-    ) {
-      addGuess(key);
-    }
-  };
-
   useEffect(() => {
     scrollToBottom();
   }, [guesses]);
 
   useEffect(() => {
+    const keyPress = ({ key }) => {
+      if (
+        letters.includes(key) &&
+        !incorrectLetters.includes(key) &&
+        correctLetter.length === 0
+      ) {
+        addGuess(key);
+      }
+    };
+
     window.addEventListener('keydown', keyPress);
     return () => {
       window.removeEventListener('keydown', keyPress);
     };
-  }, [incorrectLetters, correctLetter]);
+  });
 
   function selectLetter(e) {
     const button = e.currentTarget;
