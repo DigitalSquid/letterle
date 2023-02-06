@@ -68,7 +68,7 @@ function App() {
   return (
     <div className='App'>
       <header className='App-header'>
-        <h1>Letterdle</h1>
+        <h1>Letterle</h1>
       </header>
       <main>
         <Board

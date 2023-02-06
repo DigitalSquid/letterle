@@ -22,7 +22,7 @@ export const Board = (props) => {
           <div>
             <h2>Congratulations!</h2>
             <p>
-              You solved the <strong>Letterdle</strong> in{' '}
+              You solved the <strong>Letterle</strong> in{' '}
               <strong className='correct-text'>{props.guesses.length}</strong>{' '}
               guess
               {props.guesses.length > 1 ? 'es' : ''}.

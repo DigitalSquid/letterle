@@ -1,8 +1,8 @@
 {
-  "name": "letterdle",
-  "version": "0.1.0",
+  "name": "letterle",
+  "version": "0.1.1",
   "private": true,
-  "homepage": "https://digitalsquid.github.io/letterdle",
+  "homepage": "https://digitalsquid.github.io/letterle",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
