@@ -2,8 +2,18 @@ import './letters.scss';
 
 export const Letters = (props) => {
   const letterRows = [];
-  let rowCount = 10;
-
+  let rowCount = 0;
+  let rowEndMarker = 0;
+  let rowLength = 0;
+  if (props.isExtreme) {
+    rowCount = 20;
+    rowEndMarker = 12;
+    rowLength = 12;
+  } else {
+    rowCount = 10;
+    rowEndMarker = 19;
+    rowLength = 9;
+  }
   props.letters.forEach((letter, index) => {
     let letterState =
       props.currentGameAnswer === letter && props.hasWon
@@ -12,7 +22,7 @@ export const Letters = (props) => {
         ? 'incorrect'
         : '';
 
-    rowCount = index === 19 ? 9 : rowCount;
+    rowCount = index === rowEndMarker ? rowLength : rowCount;
     let rowIndex = Math.floor(index / rowCount);
     letterRows[rowIndex] = [
       ...(letterRows[rowIndex] || []),
@@ -31,7 +41,7 @@ export const Letters = (props) => {
   return (
     <section>
       <h2>Available letters</h2>
-      <div className='letters'>
+      <div className={`letters ${props.isExtreme ? 'extreme-mode' : ''}`}>
         {letterRows.map((button, i) => (
           <div className='row' key={i}>
             {button}

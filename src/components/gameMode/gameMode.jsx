@@ -1,5 +1,7 @@
 import gameModes from '../../data/gameModes';
 
+import './gameMode.scss';
+
 export const GameMode = (props) => {
   return (
     <div className='game-mode'>
@@ -8,7 +10,7 @@ export const GameMode = (props) => {
           <p>Select a game mode:</p>
           {gameModes.map((mode, index) => (
             <button
-              className='choice'
+              className={`choice ${mode}`}
               key={index}
               onClick={() => props.selectGameMode(mode)}
             >

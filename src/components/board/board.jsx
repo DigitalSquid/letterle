@@ -24,9 +24,6 @@ export const Board = (props) => {
               guess
               {props.guesses.length > 1 ? 'es' : ''}.
             </p>
-            <button className='choice' onClick={() => props.resetGame(true)}>
-              Mode Select
-            </button>
             {props.selectedGameMode === 'unlimited' && (
               <button className='choice' onClick={() => props.resetGame()}>
                 Play Again

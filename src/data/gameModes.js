@@ -1,2 +1,2 @@
-const gameModes = ['daily', 'unlimited'];
+const gameModes = ['daily', 'unlimited', 'extreme'];
 export default gameModes;

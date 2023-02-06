@@ -1,8 +1,13 @@
 .letters {
   margin: 0 -0.5rem;
   @media (min-width: 429px) {
-    width: 30rem;
+    max-width: 30rem;
     margin: 0 auto;
+  }
+  &.extreme-mode {
+    @media (min-width: 429px) {
+      max-width: 36rem;
+    }
   }
   button {
     font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', sans-serif;
@@ -19,13 +24,6 @@
       font-size: 1.25rem;
       width: 2.5rem;
       margin: 0.2rem;
-    }
-
-    &:nth-of-type(11) {
-      margin-left: 1rem;
-    }
-    &:nth-of-type(19) {
-      margin-right: 1rem;
     }
   }
 }

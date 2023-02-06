@@ -17,7 +17,11 @@ function App() {
     60 /
     1000;
 
-  const letters = Array.from('qwertyuiopasdfghjklzxcvbnm');
+  const lettersStandard = Array.from('qwertyuiopasdfghjklzxcvbnm');
+  const lettersExtreme = Array.from(
+    "1234567890-=qwertyuiop[]asdfghjkl;'zxcvbnm,./"
+  );
+  const [currentLetters, setCurrentLetters] = useState('');
   const [dailyAnswer] = useState(dailyLetters[dayNumber]);
   const [currentGameAnswer, setCurrentGameAnswer] = useState('');
   const [selectedGameMode, setSelectedGameMode] = useState('');
@@ -36,7 +40,7 @@ function App() {
 
   useEffect(() => {
     const keyPress = ({ key }) => {
-      if (letters.includes(key) && !guesses.includes(key) && !hasWon) {
+      if (currentLetters.includes(key) && !guesses.includes(key) && !hasWon) {
         addGuess(key);
       }
     };
@@ -69,19 +73,21 @@ function App() {
   function selectGameMode(mode) {
     setSelectedGameMode(mode);
     setCurrentGameAnswer(mode === 'daily' ? dailyAnswer : generateRandomAnswer);
+    setCurrentLetters(mode === 'extreme' ? lettersExtreme : lettersStandard);
   }
 
   function generateRandomAnswer() {
-    return letters[Math.floor(Math.random() * letters.length)];
+    return currentLetters[Math.floor(Math.random() * currentLetters.length)];
   }
 
   function resetGame(resetGameMode) {
     if (resetGameMode) {
       setSelectedGameMode('');
+    } else {
+      setCurrentGameAnswer(generateRandomAnswer);
+      setGuesses([]);
+      setHasWonState(false);
     }
-    setCurrentGameAnswer(generateRandomAnswer);
-    setGuesses([]);
-    setHasWonState(false);
   }
 
   return (
@@ -106,11 +112,17 @@ function App() {
             />
             <Letters
               currentGameAnswer={currentGameAnswer}
-              hasWon={hasWon}
               guesses={guesses}
-              letters={letters}
+              hasWon={hasWon}
+              isExtreme={selectedGameMode === 'extreme'}
+              letters={currentLetters}
               selectLetter={selectLetter}
             />
+            <nav>
+              <button className='choice' onClick={() => resetGame(true)}>
+                Mode Select
+              </button>
+            </nav>
           </>
         )}
       </main>
