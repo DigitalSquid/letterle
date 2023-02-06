@@ -3,22 +3,19 @@ import './board.scss';
 export const Board = (props) => {
   return (
     <div className='board'>
-      {props.guesses.length === 0 ? (
-        <div className='guess'>&nbsp;</div>
-      ) : (
-        props.guesses.map((guess, index) => {
-          const guessState =
-            guess === props.correctLetter ? 'correct' : 'incorrect';
-          return (
-            <div className={`guess ${guessState}`} key={index}>
-              {guess}
-            </div>
-          );
-        })
-      )}
+      {props.guesses.map((guess, index) => {
+        const guessState =
+          guess === props.currentGameAnswer ? 'correct' : 'incorrect';
+        return (
+          <div className={`guess ${guessState}`} key={index}>
+            {guess}
+          </div>
+        );
+      })}
+      {!props.hasWon && <div className='guess'>&nbsp;</div>}
 
       <div ref={props.boardEndRef}>
-        {props.correctLetter.length === 1 && (
+        {props.hasWon && (
           <div>
             <h2>Congratulations!</h2>
             <p>
@@ -27,6 +24,14 @@ export const Board = (props) => {
               guess
               {props.guesses.length > 1 ? 'es' : ''}.
             </p>
+            <button className='choice' onClick={() => props.resetGame(true)}>
+              Mode Select
+            </button>
+            {props.selectedGameMode === 'unlimited' && (
+              <button className='choice' onClick={() => props.resetGame()}>
+                Play Again
+              </button>
+            )}
           </div>
         )}
       </div>

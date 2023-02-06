@@ -5,11 +5,12 @@ export const Letters = (props) => {
   let rowCount = 10;
 
   props.letters.forEach((letter, index) => {
-    let letterState = props.correctLetter.includes(letter)
-      ? 'correct'
-      : props.incorrectLetters.includes(letter)
-      ? 'incorrect'
-      : '';
+    let letterState =
+      props.currentGameAnswer === letter && props.hasWon
+        ? 'correct'
+        : props.guesses.includes(letter)
+        ? 'incorrect'
+        : '';
 
     rowCount = index === 19 ? 9 : rowCount;
     let rowIndex = Math.floor(index / rowCount);

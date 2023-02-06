@@ -1,17 +1,27 @@
 import { useState, useRef, useEffect } from 'react';
 
+import { GameMode } from './components/gameMode/gameMode';
 import { Board } from './components/board/board';
 import { Letters } from './components/letters/letters';
 
+import dailyLetters from './data/dailyLetters.js';
 import './App.css';
 
 function App() {
+  const date = new Date();
+  const dayNumber =
+    (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) -
+      Date.UTC(date.getFullYear(), 0, 0)) /
+    24 /
+    60 /
+    60 /
+    1000;
+
   const letters = Array.from('qwertyuiopasdfghjklzxcvbnm');
-  const [answer] = useState(
-    letters[Math.floor(Math.random() * letters.length)]
-  );
-  const [incorrectLetters, setIncorrectLetters] = useState([]);
-  const [correctLetter, setCorrectLetter] = useState('');
+  const [dailyAnswer] = useState(dailyLetters[dayNumber]);
+  const [currentGameAnswer, setCurrentGameAnswer] = useState('');
+  const [selectedGameMode, setSelectedGameMode] = useState('');
+  const [hasWon, setHasWonState] = useState(false);
   const [guesses, setGuesses] = useState([]);
 
   const boardEndRef = useRef(null);
@@ -26,11 +36,7 @@ function App() {
 
   useEffect(() => {
     const keyPress = ({ key }) => {
-      if (
-        letters.includes(key) &&
-        !incorrectLetters.includes(key) &&
-        correctLetter.length === 0
-      ) {
+      if (letters.includes(key) && !guesses.includes(key) && !hasWon) {
         addGuess(key);
       }
     };
@@ -45,7 +51,7 @@ function App() {
     const button = e.currentTarget;
     const selectedLetter = button.value;
 
-    if (correctLetter.length === 0) {
+    if (!hasWon) {
       if (!button.classList.contains('incorrect')) {
         addGuess(selectedLetter);
       }
@@ -55,14 +61,27 @@ function App() {
   function addGuess(selectedLetter) {
     setGuesses((guesses) => [...guesses, selectedLetter]);
 
-    if (selectedLetter === answer) {
-      setCorrectLetter(selectedLetter);
-    } else {
-      setIncorrectLetters((incorrectLetters) => [
-        ...incorrectLetters,
-        selectedLetter,
-      ]);
+    if (selectedLetter === currentGameAnswer) {
+      setHasWonState(true);
     }
+  }
+
+  function selectGameMode(mode) {
+    setSelectedGameMode(mode);
+    setCurrentGameAnswer(mode === 'daily' ? dailyAnswer : generateRandomAnswer);
+  }
+
+  function generateRandomAnswer() {
+    return letters[Math.floor(Math.random() * letters.length)];
+  }
+
+  function resetGame(resetGameMode) {
+    if (resetGameMode) {
+      setSelectedGameMode('');
+    }
+    setCurrentGameAnswer(generateRandomAnswer);
+    setGuesses([]);
+    setHasWonState(false);
   }
 
   return (
@@ -71,17 +90,29 @@ function App() {
         <h1>Letterle</h1>
       </header>
       <main>
-        <Board
-          guesses={guesses}
-          correctLetter={correctLetter}
-          boardEndRef={boardEndRef}
+        <GameMode
+          selectedGameMode={selectedGameMode}
+          selectGameMode={selectGameMode}
         />
-        <Letters
-          correctLetter={correctLetter}
-          incorrectLetters={incorrectLetters}
-          letters={letters}
-          selectLetter={selectLetter}
-        />
+        {selectedGameMode !== '' && (
+          <>
+            <Board
+              boardEndRef={boardEndRef}
+              currentGameAnswer={currentGameAnswer}
+              guesses={guesses}
+              hasWon={hasWon}
+              resetGame={resetGame}
+              selectedGameMode={selectedGameMode}
+            />
+            <Letters
+              currentGameAnswer={currentGameAnswer}
+              hasWon={hasWon}
+              guesses={guesses}
+              letters={letters}
+              selectLetter={selectLetter}
+            />
+          </>
+        )}
       </main>
     </div>
   );

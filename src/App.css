@@ -3,8 +3,11 @@
 
 :root {
   --color-primary: #fff;
-  --color-secondary: #282c34;
+  --color-secondary: rgb(26, 26, 26);
   --color-tertiary: #5a5a5a;
+  --color-correct: rgb(106, 170, 100);
+  --color-incorrect: rgb(120, 124, 126);
+  --color-theme: 187, 134, 252;
 }
 
 body {
@@ -24,22 +27,48 @@ body {
 }
 
 .incorrect {
-  background-color: rgb(120, 124, 126);
+  background-color: var(--color-incorrect);
   color: white;
   cursor: initial;
 }
 
 .correct {
-  background-color: rgb(106, 170, 100);
+  background-color: var(--color-correct);
   color: white;
 }
 
 .correct-text {
-  color: rgb(106, 170, 100);
+  color: var(--color-correct);
 }
 
 @media (min-width: 429px) {
   .App {
     padding: 0.5rem;
   }
+}
+
+h2 {
+  text-transform: capitalize;
+}
+
+button.choice {
+  font-family: -apple-system, BlinkMacSystemFont, 'Open Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin: 0 0.25rem;
+  padding: 0.5rem 1rem;
+  background-color: rgba(var(--color-theme), 0.5);
+  color: var(--color-primary);
+  outline: 0;
+  border: 0;
+  border: 2px solid rgba(var(--color-theme), 0.25);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.2s all;
+}
+
+button.choice:hover,
+button.choice:active {
+  background-color: rgba(var(--color-theme), 0.75);
 }
