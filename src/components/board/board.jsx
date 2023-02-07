@@ -16,7 +16,7 @@ export const Board = (props) => {
 
       <div ref={props.boardEndRef}>
         {props.hasWon && (
-          <div>
+          <div className='notification'>
             <h2>Congratulations!</h2>
             <p>
               You solved the <strong>Letterle</strong> in{' '}

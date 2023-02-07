@@ -71,6 +71,7 @@ function App() {
   }
 
   function selectGameMode(mode) {
+    resetGame();
     setSelectedGameMode(mode);
     setCurrentGameAnswer(mode === 'daily' ? dailyAnswer : generateRandomAnswer);
     setCurrentLetters(mode === 'extreme' ? lettersExtreme : lettersStandard);
