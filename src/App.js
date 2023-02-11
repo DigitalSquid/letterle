@@ -19,7 +19,7 @@ function App() {
 
   const lettersStandard = Array.from('qwertyuiopasdfghjklzxcvbnm');
   const lettersExtreme = Array.from(
-    "1234567890-=qwertyuiop[]asdfghjkl;'zxcvbnm,./"
+    '!"£$%^&*()_+1234567890-=qwertyuiop[]asdfghjkl;\'zxcvbnm,./'
   );
   const [currentLetters, setCurrentLetters] = useState('');
   const [dailyAnswer] = useState(dailyLetters[dayNumber]);
