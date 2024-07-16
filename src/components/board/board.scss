@@ -17,10 +17,14 @@
 }
 
 .notification {
-  padding: 1rem;
-  margin: 1rem 0.5rem 0.5rem;
+  margin: 1.5rem 0.5rem 0.5rem;
   border: 2px solid rgba(var(--color-theme), 0.25);
   h2 {
+    background-color: rgba(var(--color-theme), 0.25);
+    padding: 0.5rem;
     margin-top: 0;
+  }
+  p {
+    font-size: 1.25rem;
   }
 }

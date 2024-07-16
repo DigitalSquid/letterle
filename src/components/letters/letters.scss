@@ -1,5 +1,6 @@
 .letters {
   margin: 0 -0.5rem;
+  transition: 0.2s ease opacity;
   @media (min-width: 429px) {
     max-width: 30rem;
     margin: 0 auto;
@@ -24,6 +25,12 @@
       font-size: 1.25rem;
       width: 2.5rem;
       margin: 0.2rem;
+    }
+  }
+  &.inactive {
+    opacity: 0.5;
+    button {
+      pointer-events: none;
     }
   }
 }

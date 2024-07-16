@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { GameMode } from './components/gameMode/gameMode';
 import { Board } from './components/board/board';
@@ -51,6 +51,18 @@ function App() {
     };
   });
 
+  useEffect(() => {
+    setCurrentLetters(
+      selectedGameMode === 'extreme' ? lettersExtreme : lettersStandard
+    );
+  }, [selectedGameMode]);
+
+  useEffect(() => {
+    setCurrentGameAnswer(
+      selectedGameMode === 'daily' ? dailyAnswer : generateRandomAnswer
+    );
+  }, [currentLetters]);
+
   function selectLetter(e) {
     const button = e.currentTarget;
     const selectedLetter = button.value;
@@ -73,8 +85,6 @@ function App() {
   function selectGameMode(mode) {
     resetGame();
     setSelectedGameMode(mode);
-    setCurrentGameAnswer(mode === 'daily' ? dailyAnswer : generateRandomAnswer);
-    setCurrentLetters(mode === 'extreme' ? lettersExtreme : lettersStandard);
   }
 
   function generateRandomAnswer() {

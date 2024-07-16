@@ -34,7 +34,11 @@ export const Letters = (props) => {
   return (
     <section>
       <h2>Available letters</h2>
-      <div className={`letters ${props.isExtreme ? 'extreme-mode' : ''}`}>
+      <div
+        className={`letters ${props.isExtreme ? 'extreme-mode' : ''} ${
+          props.hasWon ? 'inactive' : ''
+        }`}
+      >
         {letterRows.map((button, i) => (
           <div className='row' key={i}>
             {button}
