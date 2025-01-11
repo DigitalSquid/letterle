@@ -2,19 +2,21 @@ import './board.scss';
 
 export const Board = (props) => {
   return (
-    <div className='board'>
-      {props.guesses.map((guess, index) => {
-        const guessState =
-          guess === props.currentGameAnswer ? 'correct' : 'incorrect';
-        return (
-          <div className={`guess ${guessState}`} key={index}>
-            {guess}
-          </div>
-        );
-      })}
-      {!props.hasWon && <div className='guess'>&nbsp;</div>}
-
-      <div ref={props.boardEndRef}>
+    <>
+      <div className='board'>
+        {props.guesses.map((guess, index) => {
+          const guessState =
+            guess === props.currentGameAnswer ? 'correct' : 'incorrect';
+          return (
+            <div className={`guess ${guessState}`} key={index}>
+              {guess}
+            </div>
+          );
+        })}
+        {!props.hasWon && <div className='guess'>&nbsp;</div>}
+        <span ref={props.boardEndRef} />
+      </div>
+      <div>
         {props.hasWon && (
           <div className='notification'>
             <h2>Congratulations!</h2>
@@ -32,6 +34,6 @@ export const Board = (props) => {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 };

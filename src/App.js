@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { GameMode } from './components/gameMode/gameMode';
+import { ChangeGameMode, GameMode } from './components/gameMode/gameMode';
 import { Board } from './components/board/board';
 import { Letters } from './components/letters/letters';
 
@@ -21,21 +21,17 @@ function App() {
   const lettersExtreme = Array.from(
     '!"£$%^&*()_+1234567890-=qwertyuiop[]asdfghjkl;\'zxcvbnm,./'
   );
+  const [currentGameAnswer, setCurrentGameAnswer] = useState('');
   const [currentLetters, setCurrentLetters] = useState('');
   const [dailyAnswer] = useState(dailyLetters[dayNumber]);
-  const [currentGameAnswer, setCurrentGameAnswer] = useState('');
-  const [selectedGameMode, setSelectedGameMode] = useState('');
-  const [hasWon, setHasWonState] = useState(false);
   const [guesses, setGuesses] = useState([]);
+  const [hasWon, setHasWonState] = useState(false);
+  const [selectedGameMode, setSelectedGameMode] = useState('');
 
   const boardEndRef = useRef(null);
 
-  const scrollToBottom = () => {
-    boardEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   useEffect(() => {
-    scrollToBottom();
+    boardEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [guesses]);
 
   useEffect(() => {
@@ -51,25 +47,12 @@ function App() {
     };
   });
 
-  useEffect(() => {
-    setCurrentLetters(
-      selectedGameMode === 'extreme' ? lettersExtreme : lettersStandard
-    );
-  }, [selectedGameMode]);
-
-  useEffect(() => {
-    setCurrentGameAnswer(
-      selectedGameMode === 'daily' ? dailyAnswer : generateRandomAnswer
-    );
-  }, [currentLetters]);
-
   function selectLetter(e) {
     const button = e.currentTarget;
-    const selectedLetter = button.value;
 
     if (!hasWon) {
       if (!button.classList.contains('incorrect')) {
-        addGuess(selectedLetter);
+        addGuess(button.value);
       }
     }
   }
@@ -84,6 +67,8 @@ function App() {
 
   function selectGameMode(mode) {
     resetGame();
+    setCurrentLetters(mode === 'extreme' ? lettersExtreme : lettersStandard);
+    setCurrentGameAnswer(mode === 'daily' ? dailyAnswer : generateRandomAnswer);
     setSelectedGameMode(mode);
   }
 
@@ -129,11 +114,7 @@ function App() {
               letters={currentLetters}
               selectLetter={selectLetter}
             />
-            <nav>
-              <button className='choice' onClick={() => resetGame(true)}>
-                Mode Select
-              </button>
-            </nav>
+            <ChangeGameMode resetGame={resetGame} />
           </>
         )}
       </main>

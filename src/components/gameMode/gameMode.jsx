@@ -1,13 +1,11 @@
-import gameModes from '../../data/gameModes';
-
 import './gameMode.scss';
 
 export const GameMode = (props) => {
+  const gameModes = ['daily', 'unlimited', 'extreme'];
   return (
     <div className='game-mode'>
       {props.selectedGameMode === '' ? (
         <>
-          <p>Select a game mode:</p>
           {gameModes.map((mode, index) => (
             <button
               className={`choice ${mode}`}
@@ -22,5 +20,15 @@ export const GameMode = (props) => {
         <h2>{props.selectedGameMode} mode</h2>
       )}
     </div>
+  );
+};
+
+export const ChangeGameMode = (props) => {
+  return (
+    <nav>
+      <button className='choice' onClick={() => props.resetGame(true)}>
+        Change Game Mode
+      </button>
+    </nav>
   );
 };
